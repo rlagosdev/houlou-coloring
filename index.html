@@ -108,6 +108,12 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 .song .eq i:nth-child(2){animation-delay:.2s}.song .eq i:nth-child(3){animation-delay:.4s}
 @keyframes eq{0%,100%{height:4px}50%{height:14px}}
 @media (prefers-reduced-motion: reduce){.song .eq i{animation:none;height:10px}}
+.sw{display:flex;gap:10px;justify-content:center;margin:12px 0}
+.sw button{width:30px;height:30px;border-radius:50%;border:2px solid var(--line);cursor:pointer;padding:0}
+.sw button[aria-pressed="true"]{outline:3px solid var(--accent);outline-offset:2px}
+.btn.opt{background:var(--paper);color:var(--ink);border:2px solid var(--line);cursor:pointer;font:inherit;font-weight:700}
+.btn.opt.on{border-color:var(--accent);background:var(--accent);color:var(--accent-ink)}
+#giftBuy{display:block;text-align:center;margin-top:4px}
 </style>
 </head>
 <body>
@@ -152,7 +158,7 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
     </div>
     <div class="bundle best">
       <span class="tag">Perfect gift · free shipping</span>
-      <img src="shop/gift.jpg" alt="Houlou Gift Set: a T-shirt or bodysuit, a poster and the 4 printable ebooks">
+      <img id="giftImg" src="shop/gift-t-white.jpg" alt="Houlou Gift Set: a T-shirt or bodysuit, a poster and the 4 printable ebooks">
       <h3>Houlou Gift Set</h3>
       <div class="price">€49.90 <small>shipping included</small></div>
       <ul>
@@ -160,11 +166,13 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
         <li>The <strong>30×40 cm nursery poster</strong></li>
         <li>All <strong>4 printable ebooks</strong>, ready to download right away</li>
       </ul>
-      <div class="duo">
-        <a class="btn buy" href="https://buy.stripe.com/6oU7sK6Q3fZFc056dzfMA0a">With a T-shirt</a>
-        <a class="btn buy" href="https://buy.stripe.com/8x2fZg6Q37t95BHgSdfMA0b">With a bodysuit</a>
+      <div class="duo" role="group" aria-label="Garment">
+        <button type="button" class="btn opt on" data-gift="t" aria-pressed="true">With a T-shirt</button>
+        <button type="button" class="btn opt" data-gift="b" aria-pressed="false">With a bodysuit</button>
       </div>
-      <p class="fine">You choose the size and color on the next page. Ships in about 5–10 business days.</p>
+      <div class="sw" data-for="gift" role="group" aria-label="Color"></div>
+      <a class="btn buy" id="giftBuy" href="https://buy.stripe.com/cNi7sK6Q3dRxaW1cBXfMA0k">Get the gift set · €49.90</a>
+      <p class="fine">Pick the color here, the size on the next page. Ships in about 5–10 business days.</p>
     </div>
   </div>
 </section>
@@ -185,8 +193,8 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
   <h2 style="margin-top:8px">Take Houlou home</h2>
   <p class="lead" style="margin-top:8px">Or pick a single item: clothes, posters and goodies with Houlou and his friends, made to order for you. Free shipping to Europe, the UK, the US, Canada and Australia.</p>
   <div class="shop">
-    <div class="item"><img src="shop/tshirt.jpg" alt="Kids T-shirt" loading="lazy"><span class="free">Free shipping</span><h3>Kids T-shirt</h3><p class="fine">Sizes 4 to 20 years · 4 colors</p><div class="px">€24.90</div><a class="btn buy" href="https://buy.stripe.com/dRm3cu5LZ14Ld4931nfMA03">Buy</a></div>
-    <div class="item"><img src="shop/body.jpg" alt="Baby bodysuit" loading="lazy"><span class="free">Free shipping</span><h3>Baby bodysuit</h3><p class="fine">Newborn to 24 months · 4 colors</p><div class="px">€29.90</div><a class="btn buy" href="https://buy.stripe.com/14A4gy0rFfZF6FLatPfMA04">Buy</a></div>
+    <div class="item"><img id="teeImg" src="shop/tshirt-white.jpg" alt="Kids T-shirt" loading="lazy"><span class="free">Free shipping</span><h3>Kids T-shirt</h3><p class="fine">Sizes 4 to 20 years · 4 colors</p><div class="sw" data-for="tee" role="group" aria-label="Color"></div><div class="px">€24.90</div><a class="btn buy" id="teeBuy" href="https://buy.stripe.com/bJeeVc3DR28P0hn45rfMA0c">Buy</a></div>
+    <div class="item"><img id="bodyImg" src="shop/body-white.jpg" alt="Baby bodysuit" loading="lazy"><span class="free">Free shipping</span><h3>Baby bodysuit</h3><p class="fine">Newborn to 24 months · 4 colors</p><div class="sw" data-for="body" role="group" aria-label="Color"></div><div class="px">€29.90</div><a class="btn buy" id="bodyBuy" href="https://buy.stripe.com/9B614m8Yb3cT4xD1XjfMA0g">Buy</a></div>
     <div class="item"><img src="shop/poster.jpg" alt="Nursery poster 30×40 cm" loading="lazy"><span class="free">Free shipping</span><h3>Nursery poster 30×40 cm</h3><p class="fine">Matte paper · frame not included</p><div class="px">€27.90</div><a class="btn buy" href="https://buy.stripe.com/aFa14mfmz6p5e8dcBXfMA06">Buy</a></div>
     <div class="item"><img src="shop/poster.jpg" alt="Nursery poster 45×60 cm" loading="lazy"><span class="free">Free shipping</span><h3>Nursery poster 45×60 cm</h3><p class="fine">Large size · frame not included</p><div class="px">€32.90</div><a class="btn buy" href="https://buy.stripe.com/5kQ4gy4HV5l18NTcBXfMA07">Buy</a></div>
     <div class="item"><img src="shop/tote.jpg" alt="Tote bag" loading="lazy"><span class="free">Free shipping</span><h3>Tote bag</h3><p class="fine">Sturdy cotton canvas</p><div class="px">€27.90</div><a class="btn buy" href="https://buy.stripe.com/5kQ00ieiv9Bh9RXgSdfMA05">Buy</a></div>
@@ -265,6 +273,37 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
   var b=document.getElementById('song'),a=document.getElementById('songAudio'),ico=document.getElementById('songIco'),t=document.getElementById('songTxt');
   function etat(on){b.setAttribute('aria-pressed',on?'true':'false');ico.textContent=on?'❚❚':'▶';t.textContent=on?'Houlou is dancing…':"Listen to Houlou's song"}
   b.addEventListener('click',function(){ if(a.paused){a.play().then(function(){etat(true)}).catch(function(){etat(false)})} else {a.pause();etat(false)} });
+})();
+</script>
+<script>
+(function(){
+  // Une page de paiement Stripe par couleur : la photo et le lien suivent la couleur choisie.
+  var B='https://buy.stripe.com/';
+  var C=[['white','White','#ffffff'],['lightblue','Light blue','#a9d4f0'],['pink','Pink','#f6c1d0'],['yellow','Yellow','#f7e08a']];
+  var L={tee:['bJeeVc3DR28P0hn45rfMA0c','eVqcN46Q34gX3tz31nfMA0d','dRm8wOa2f3cTc05gSdfMA0e','28EdR8gqD7t94xD7hDfMA0f'],
+    body:['9B614m8Yb3cT4xD1XjfMA0g','28E7sK8Yb14L8NTcBXfMA0h','7sY6oG1vJ4gX8NT1XjfMA0i','9B64gyfmz28P9RXbxTfMA0j'],
+    giftt:['cNi7sK6Q3dRxaW1cBXfMA0k','28EbJ07U73cT0hn31nfMA0l','eVq7sKa2f6p5ggl7hDfMA0m','14A4gy7U700H1lrgSdfMA0n'],
+    giftb:['aFaeVc8Yb8xdc05dG1fMA0o','cNi3cua2f9Bh8NT8lHfMA0p','fZuaEW1vJ8xd7JPgSdfMA0q','3cI3cu3DR7t9aW1cBXfMA0r']};
+  var IMG={tee:'tshirt-',body:'body-',giftt:'gift-t-',giftb:'gift-b-'};
+  var st={tee:0,body:0,gift:0,g:'t'};
+  function lien(a,code){var q=a.href.split('?')[1];a.href=B+code+(q?'?'+q:'')}
+  function maj(k){
+    var key=k==='gift'?'gift'+st.g:k,i=st[k];
+    document.getElementById(k+'Img').src='shop/'+IMG[key]+C[i][0]+'.jpg';
+    lien(document.getElementById(k+'Buy'),L[key][i]);
+    document.querySelectorAll('.sw[data-for="'+k+'"] button').forEach(function(b,j){b.setAttribute('aria-pressed',j===i?'true':'false')});
+  }
+  document.querySelectorAll('.sw').forEach(function(box){
+    var k=box.getAttribute('data-for');
+    C.forEach(function(c,i){var b=document.createElement('button');b.type='button';b.title=c[1];b.setAttribute('aria-label',c[1]);b.style.background=c[2];
+      b.addEventListener('click',function(){st[k]=i;maj(k)});box.appendChild(b)});
+    maj(k);
+  });
+  document.querySelectorAll('[data-gift]').forEach(function(b){b.addEventListener('click',function(){
+    st.g=b.getAttribute('data-gift');
+    document.querySelectorAll('[data-gift]').forEach(function(x){var on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on?'true':'false')});
+    maj('gift');
+  })});
 })();
 </script>
 </body>
