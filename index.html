@@ -6,7 +6,7 @@
 <title>Houlou's Coloring Book</title>
 <meta property="og:type" content="website">
 <meta property="og:title" content="Houlou's Coloring Book — printable pages your little one will love">
-<meta property="og:description" content="Meet Houlou, the sleepy baby owl, and his friends. A printable coloring book for ages 3–7. Instant PDF download for €4.90.">
+<meta property="og:description" content="Meet Houlou, the sleepy baby owl, and his friends. Printable coloring books for ages 3–7: €4.90 the book, €11.99 the 4-book pack. Instant PDF download.">
 <meta property="og:image" content="https://coloring.houlou.fr/og.jpg">
 <meta property="og:url" content="https://coloring.houlou.fr/">
 <meta name="description" content="Houlou's Coloring Book: printable coloring pages of a cute baby owl and his friends, for children aged 3 to 7.">
@@ -37,6 +37,7 @@ p{margin:0}
 .eyebrow{font-family:var(--display);font-weight:600;font-size:.9rem;letter-spacing:.02em;text-transform:uppercase;color:var(--accent)}
 .lead{font-size:1.15rem;color:var(--muted);max-width:56ch}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 1.05rem var(--display);border-radius:999px;padding:14px 26px;border:none;background:var(--accent);color:var(--accent-ink);cursor:pointer;text-decoration:none;box-shadow:0 6px 0 rgba(42,39,64,.12)}
+.btn.sun{background:var(--sun);color:#3d2f00}
 .btn.ghost{background:transparent;color:var(--accent);box-shadow:none;text-decoration:underline}
 .btn:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 section{padding-block:clamp(40px,7vw,76px)}
@@ -54,7 +55,7 @@ section{padding-block:clamp(40px,7vw,76px)}
 .feat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:28px}
 .card{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:8px}
 .card .ico{font-size:1.8rem}
-.reserve{background:var(--accent-soft);border:2px solid var(--line);border-radius:22px;padding:clamp(22px,4vw,40px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(22px,4vw,44px);align-items:center}
+.reserve{background:var(--accent-soft);border:2px solid var(--line);border-radius:22px;padding:clamp(22px,4vw,40px);display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(22px,4vw,44px);align-items:center}
 .price{font-family:var(--display);font-size:2.6rem;font-weight:700;color:var(--ink)}
 .price small{font-family:var(--body);font-size:1rem;font-weight:600;color:var(--muted)}
 form{display:flex;flex-direction:column;gap:14px}
@@ -68,8 +69,16 @@ input,select{font:1rem var(--body);padding:12px 14px;border:2px solid var(--line
 .faq h3{font-family:var(--body);font-weight:700;font-size:1.02rem;margin-bottom:4px}
 footer{border-top:2px solid var(--line);padding-block:30px;font-size:.88rem;color:var(--muted)}
 footer .wrap{display:flex;flex-direction:column;gap:6px}
+.pack{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(22px,4vw,44px);align-items:center}
+.pack img{width:100%;border-radius:20px;display:block}
+.pack ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.offers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.offer{background:var(--paper);border:2px solid var(--line);border-radius:22px;padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:12px;min-width:0;position:relative}
+.offer.best{border-color:var(--accent);box-shadow:0 10px 30px rgba(90,169,230,.18)}
+.offer .tag{position:absolute;top:-14px;right:18px;background:var(--sun);color:#3d2f00;font:700 .85rem var(--display);border-radius:999px;padding:4px 12px}
+.offer .btn{width:100%;margin-top:auto}
 @media (max-width:820px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.feat{grid-template-columns:minmax(0,1fr)}}
-@media (max-width:760px){.hero,.reserve{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:760px){.hero,.reserve,.pack,.offers{grid-template-columns:minmax(0,1fr)}}
 @media (prefers-reduced-motion:no-preference){.btn{transition:transform .12s}.btn:active{transform:translateY(2px)}}
 .song{align-self:flex-start;width:fit-content;display:inline-flex;align-items:center;gap:10px;margin-top:14px;font:600 .95rem var(--body);color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:8px 16px 8px 8px;cursor:pointer}
 .song .pi{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--sun);color:#2a2740;font-size:.9rem}
@@ -91,6 +100,7 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
     <p class="lead">Houlou and his woodland friends are waiting to be brought to life with crayons. Big, friendly outlines made for small hands — print at home, color anywhere.</p>
     <div class="ctas">
       <a class="btn buy" href="https://buy.stripe.com/fZu5kCcan4gX2pvdG1fMA01">Get the book · €4.90</a>
+      <a class="btn sun" href="#pack">4-book pack · €11.99</a>
       <a class="btn ghost" href="#peek">See the pages</a>
     </div>
     <p class="fine">Instant PDF download · 20 coloring pages · print as many times as you like.</p>
@@ -114,6 +124,25 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
   </div>
 </section>
 
+<section class="wrap" id="pack" aria-label="The coloring pack">
+  <div class="pack">
+    <img src="pack.jpg" alt="The four Houlou coloring books: Coloring Book, Big Adventures, Happy Holidays and Mystery Pictures" loading="lazy">
+    <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
+      <span class="eyebrow">New · best value</span>
+      <h2>Houlou's Coloring Pack</h2>
+      <div class="price">€11.99 <small>one-time · 4 PDF books · 70 pages</small></div>
+      <ul>
+        <li><strong>Houlou's Coloring Book</strong> — 20 cozy pages</li>
+        <li><strong>Big Adventures</strong> — rocket, pirates, dinosaurs, firefighters… 20 pages</li>
+        <li><strong>Happy Holidays</strong> — Christmas, Easter, Halloween, birthdays… 20 pages</li>
+        <li><strong>Bonus: Mystery Pictures</strong> — 10 color-by-number secrets with their answers</li>
+      </ul>
+      <a class="btn buy" href="https://buy.stripe.com/4gM14m4HV6p55BH45rfMA02">Get the pack · €11.99</a>
+      <p class="fine">70 printable pages · instant download · one-time payment.</p>
+    </div>
+  </div>
+</section>
+
 <section class="wrap" aria-label="What's inside">
   <span class="eyebrow">Why kids love it</span>
   <h2 style="margin-top:8px">Simple, happy, and screen-free</h2>
@@ -128,14 +157,24 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
   <div class="reserve">
     <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
       <span class="eyebrow">Available now</span>
-      <h2>Get Houlou's Coloring Book</h2>
-      <div class="price">€4.90 <small>one-time · instant PDF download</small></div>
-      <p class="lead" style="font-size:1rem">23 printable A4 pages: a cover, a "This book belongs to" page and 20 coloring pages starring Houlou and his friends.</p>
-      <p class="note">Secure card payment by Stripe. Your download link appears right after payment.</p>
+      <h2>Choose your Houlou books</h2>
+      <p class="lead" style="font-size:1rem">Printable A4 PDFs with a full-color cover, a "This book belongs to" page and big, friendly pages starring Houlou and his friends.</p>
+      <p class="note">Secure card payment by Stripe. Your download links appear right after payment. By buying, you accept our <a href="terms.html">Terms of Sale</a>.</p>
     </div>
-    <div style="min-width:0;display:flex;flex-direction:column;gap:12px;justify-content:center">
-      <a class="btn buy" href="https://buy.stripe.com/fZu5kCcan4gX2pvdG1fMA01" style="width:100%">Buy now · €4.90</a>
-      <p class="note" style="text-align:center">By buying, you accept our <a href="terms.html">Terms of Sale</a>.</p>
+    <div class="offers">
+      <div class="offer">
+        <h3>The Coloring Book</h3>
+        <div class="price">€4.90</div>
+        <p class="fine">1 book · 20 coloring pages</p>
+        <a class="btn buy" href="https://buy.stripe.com/fZu5kCcan4gX2pvdG1fMA01">Buy the book</a>
+      </div>
+      <div class="offer best">
+        <span class="tag">Best value</span>
+        <h3>The Coloring Pack</h3>
+        <div class="price">€11.99</div>
+        <p class="fine">3 books + 10 mystery pictures · 70 pages</p>
+        <a class="btn buy" href="https://buy.stripe.com/4gM14m4HV6p55BH45rfMA02">Buy the pack</a>
+      </div>
     </div>
   </div>
 </section>
@@ -146,7 +185,8 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
   <div class="faq">
     <div><h3>What exactly do I get?</h3><p>A printable PDF coloring book starring Houlou the baby owl and his friends. You download it once and print the pages whenever you like.</p></div>
     <div><h3>What age is it for?</h3><p>It's made for children aged 3 to 7, with thick, simple outlines. Younger and older children enjoy it too.</p></div>
-    <div><h3>How do I pay?</h3><p>By card, through Stripe's secure checkout. It's a one-time payment of €4.90, no subscription.</p></div>
+    <div><h3>How do I pay?</h3><p>By card, through Stripe's secure checkout. It's a one-time payment — €4.90 for the book or €11.99 for the 4-book pack — no subscription.</p></div>
+    <div><h3>What is a mystery picture?</h3><p>A color-by-number page: each number matches a crayon, and a hidden picture of Houlou appears as your child colors. The answers are at the end of the book.</p></div>
     <div><h3>How will I get it?</h3><p>Instantly: the download link appears right after payment, and you also get a receipt by email.</p></div>
   </div>
 </section>
