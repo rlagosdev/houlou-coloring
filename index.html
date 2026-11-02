@@ -6,7 +6,7 @@
 <title>Houlou's Coloring Book</title>
 <meta property="og:type" content="website">
 <meta property="og:title" content="Houlou's Coloring Book — printable pages your little one will love">
-<meta property="og:description" content="Meet Houlou, the sleepy baby owl, and his friends. A printable coloring book for ages 3–7. Reserve your copy for €4.90 — pay nothing today.">
+<meta property="og:description" content="Meet Houlou, the sleepy baby owl, and his friends. A printable coloring book for ages 3–7. Instant PDF download for €4.90.">
 <meta property="og:image" content="https://coloring.houlou.fr/og.jpg">
 <meta property="og:url" content="https://coloring.houlou.fr/">
 <meta name="description" content="Houlou's Coloring Book: printable coloring pages of a cute baby owl and his friends, for children aged 3 to 7.">
@@ -81,10 +81,10 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
     <h1>Color along with Houlou, the sleepy little owl</h1>
     <p class="lead">Houlou and his woodland friends are waiting to be brought to life with crayons. Big, friendly outlines made for small hands — print at home, color anywhere.</p>
     <div class="ctas">
-      <a class="btn" href="#reserve">Reserve my copy · €4.90</a>
+      <a class="btn buy" href="https://buy.stripe.com/fZu5kCcan4gX2pvdG1fMA01">Get the book · €4.90</a>
       <a class="btn ghost" href="#peek">See the pages</a>
     </div>
-    <p class="fine">Nothing to pay today. Reserve now and be the first to get it when it opens.</p>
+    <p class="fine">Instant PDF download · 20 coloring pages · print as many times as you like.</p>
   </div>
   <div class="hero-art">
     <img src="pages/web-page-1-night.jpg" alt="Coloring page of Houlou the baby owl under the moon and stars">
@@ -116,29 +116,15 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 <section class="wrap" id="reserve">
   <div class="reserve">
     <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
-      <span class="eyebrow">Coming soon</span>
-      <h2>Reserve Houlou's Coloring Book</h2>
+      <span class="eyebrow">Available now</span>
+      <h2>Get Houlou's Coloring Book</h2>
       <div class="price">€4.90 <small>one-time · instant PDF download</small></div>
-      <p class="lead" style="font-size:1rem">Leave your email and you'll be the first to know the moment it's ready — at the launch price.</p>
-      <p class="note">Nothing to pay today. You won't be charged anything unless you choose to buy it at launch.</p>
+      <p class="lead" style="font-size:1rem">23 printable A4 pages: a cover, a "This book belongs to" page and 20 coloring pages starring Houlou and his friends.</p>
+      <p class="note">Secure card payment by Stripe. Your download link appears right after payment.</p>
     </div>
-    <div style="min-width:0">
-      <form id="f" novalidate>
-        <label for="email">Your email<input type="email" id="email" autocomplete="email" placeholder="you@example.com"></label>
-        <label for="age">Your child's age
-          <select id="age">
-            <option value="">Choose…</option>
-            <option>Under 3</option>
-            <option>3–4 years</option>
-            <option>5–6 years</option>
-            <option>7+ years</option>
-          </select>
-        </label>
-        <label class="check" for="ok"><input type="checkbox" id="ok" style="margin-top:4px">I'd like to be emailed when Houlou's Coloring Book is ready. Unsubscribe anytime.</label>
-        <div class="err" id="err" role="alert"></div>
-        <button class="btn" type="submit" id="go">Reserve my copy · €4.90</button>
-      </form>
-      <div class="ok" id="merci" hidden>You're on the list! 🦉 We'll email you the moment Houlou is ready.</div>
+    <div style="min-width:0;display:flex;flex-direction:column;gap:12px;justify-content:center">
+      <a class="btn buy" href="https://buy.stripe.com/fZu5kCcan4gX2pvdG1fMA01" style="width:100%">Buy now · €4.90</a>
+      <p class="note" style="text-align:center">By buying, you accept our <a href="terms.html">Terms of Sale</a>.</p>
     </div>
   </div>
 </section>
@@ -149,38 +135,25 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
   <div class="faq">
     <div><h3>What exactly do I get?</h3><p>A printable PDF coloring book starring Houlou the baby owl and his friends. You download it once and print the pages whenever you like.</p></div>
     <div><h3>What age is it for?</h3><p>It's made for children aged 3 to 7, with thick, simple outlines. Younger and older children enjoy it too.</p></div>
-    <div><h3>Do I pay now?</h3><p>No. Reserving just adds your email to the list. You'll only pay if you decide to buy it at launch, at €4.90.</p></div>
-    <div><h3>How will I get it?</h3><p>By email, as a download link, as soon as it's ready.</p></div>
+    <div><h3>How do I pay?</h3><p>By card, through Stripe's secure checkout. It's a one-time payment of €4.90, no subscription.</p></div>
+    <div><h3>How will I get it?</h3><p>Instantly: the download link appears right after payment, and you also get a receipt by email.</p></div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <span>Houlou is an original character by RLBX, SASU, SIREN 995 302 668, Nantes, France. Contact: contact@rlbx.tech</span>
+    <span>Houlou is an original character by RLBX, SASU, SIREN 995 302 668, Nantes, France. Contact: contact@rlbx.tech · <a href="terms.html">Terms of Sale &amp; legal notice</a></span>
     <span id="fb-line"><a href="https://www.facebook.com/houloucoloring" rel="noopener">Follow Houlou on Facebook</a></span>
   </div>
 </footer>
 
 <script>
 (function(){
-  var f=document.getElementById('f'),err=document.getElementById('err');
-  ['email','age','ok'].forEach(function(id){document.getElementById(id).addEventListener('input',function(){err.textContent=''})});
-  f.addEventListener('submit',function(e){
-    e.preventDefault();
-    var em=document.getElementById('email').value.trim();
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){err.textContent='Please enter a valid email address.';return}
-    if(!document.getElementById('ok').checked){err.textContent='Please tick the box so we can email you.';return}
-    var FORM_URL='https://46c1f093.sibforms.com/serve/MUIFABIfTCIP49X1H0qYP68kx1R84rEStPUgSZeukm75Hiftk3lbAvT00L8461Y6sK4qJAbc_-vyrvaRx94JqWwpji7sY6aQsOWhJIb4G9xLDPsgDqEXYrhQQtgj4Af9Z3dAvtAcPaX9e2y14GNmZ0ViR-CyjQjFllgfQJDAAxUUH1cnXodd4PGjZleVXvbzCpPXEGsuqDYvV3auTQ==';
-    if(!FORM_URL){err.textContent='Reservations open very soon — please check back shortly.';return}
-    var d=new FormData();
-    d.append('EMAIL',em);
-    d.append('JOB_TITLE',document.getElementById('age').value);
-    d.append('OPT_IN','1');d.append('email_address_check','');d.append('locale','en');
-    var q=new URLSearchParams(location.search),ad=(q.get('utm_content')||'').replace(/[^A-Za-z0-9]/g,'').slice(0,8);
-    d.append('SOURCE','houlou-'+(q.get('utm_source')==='meta'?'meta-'+(ad||'x'):'direct'));
-    document.getElementById('go').disabled=true;
-    fetch(FORM_URL,{method:'POST',body:d,mode:'no-cors'}).then(function(){f.hidden=true;document.getElementById('merci').hidden=false}).catch(function(){err.textContent='Something went wrong. Please check your connection and try again.';document.getElementById('go').disabled=false});
-  });
+  // Passe l'origine de la visite (pub Meta A/B/C, Page Facebook…) au paiement Stripe pour savoir ce qui vend.
+  var q=new URLSearchParams(location.search);
+  var src=(q.get('utm_source')||'direct')+'-'+(q.get('utm_content')||q.get('utm_medium')||'x');
+  src=src.replace(/[^A-Za-z0-9_-]/g,'').slice(0,60);
+  document.querySelectorAll('a.buy').forEach(function(a){a.href=a.href.split('?')[0]+'?client_reference_id='+encodeURIComponent('houlou-'+src)});
 })();
 </script>
 </body>
