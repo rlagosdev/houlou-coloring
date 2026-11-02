@@ -170,7 +170,7 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
     var em=document.getElementById('email').value.trim();
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){err.textContent='Please enter a valid email address.';return}
     if(!document.getElementById('ok').checked){err.textContent='Please tick the box so we can email you.';return}
-    var FORM_URL='';
+    var FORM_URL='https://46c1f093.sibforms.com/serve/MUIFABIfTCIP49X1H0qYP68kx1R84rEStPUgSZeukm75Hiftk3lbAvT00L8461Y6sK4qJAbc_-vyrvaRx94JqWwpji7sY6aQsOWhJIb4G9xLDPsgDqEXYrhQQtgj4Af9Z3dAvtAcPaX9e2y14GNmZ0ViR-CyjQjFllgfQJDAAxUUH1cnXodd4PGjZleVXvbzCpPXEGsuqDYvV3auTQ==';
     if(!FORM_URL){err.textContent='Reservations open very soon — please check back shortly.';return}
     var d=new FormData();
     d.append('EMAIL',em);
