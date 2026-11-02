@@ -159,6 +159,8 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
     </ul>
     <a class="btn buy" href="https://buy.stripe.com/fZu6oGb6j28P9RXfO9fMA0v">Get the Christmas Box · €59.90</a>
     <div class="trust"><span>🎁 €69.70 if bought separately — ebooks included</span><span>🚚 Delivered in about 2–3 weeks</span><span>⚡ Ebooks: instant download</span></div>
+    <button class="song" id="song" type="button" aria-pressed="false"><span class="pi" id="songIco">▶</span><span id="songTxt">Listen to Houlou's song</span><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span></button>
+    <audio id="songAudio" src="../houlou-song.mp3" preload="none" loop></audio>
   </div>
 </header>
 <section class="wrap"><span class="eyebrow">What's in the box</span><h2 style="margin-top:8px">Everything for a Houlou Christmas</h2>
@@ -176,6 +178,14 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
   src=src.replace(/[^A-Za-z0-9_-]/g,'').slice(0,60);
   window.HOULOU_REF='?client_reference_id='+encodeURIComponent('houlou-'+src);
   document.querySelectorAll('a.buy').forEach(function(a){a.href=a.href.split('?')[0]+window.HOULOU_REF});
+})();
+</script>
+<script>
+(function(){
+  var b=document.getElementById('song'),a=document.getElementById('songAudio'),ico=document.getElementById('songIco'),t=document.getElementById('songTxt');
+  if(!b)return;
+  function etat(on){b.setAttribute('aria-pressed',on?'true':'false');ico.textContent=on?'❚❚':'▶';t.textContent=on?'Houlou is dancing…':"Listen to Houlou's song"}
+  b.addEventListener('click',function(){ if(a.paused){a.play().then(function(){etat(true)}).catch(function(){etat(false)})} else {a.pause();etat(false)} });
 })();
 </script>
 
