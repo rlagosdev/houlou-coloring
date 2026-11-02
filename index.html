@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Houlou's Coloring Book</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Houlou's Coloring Book — printable pages your little one will love">
+<meta property="og:description" content="Meet Houlou, the sleepy baby owl, and his friends. A printable coloring book for ages 3–7. Reserve your copy for €4.90 — pay nothing today.">
+<meta property="og:image" content="https://coloring.houlou.fr/og.jpg">
+<meta property="og:url" content="https://coloring.houlou.fr/">
+<meta name="description" content="Houlou's Coloring Book: printable coloring pages of a cute baby owl and his friends, for children aged 3 to 7.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap">
+<style>
+:root{
+  --bg:#fdf7ee; --paper:#ffffff; --ink:#2a2740; --muted:#6b6880; --line:#eadfce;
+  --accent:#5aa9e6; --accent-ink:#ffffff; --accent-soft:#e7f2fc; --sun:#ffc94d; --leaf:#7ec17a;
+  --display:"Baloo 2", system-ui, sans-serif;
+  --body:"Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1d1b2a; --paper:#262338; --ink:#f0edf7; --muted:#b3aecb; --line:#3a3652;
+  --accent:#78bdf2; --accent-ink:#0f1626; --accent-soft:#223049; --sun:#ffd470; --leaf:#8fd08a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1d1b2a; --paper:#262338; --ink:#f0edf7; --muted:#b3aecb; --line:#3a3652;
+  --accent:#78bdf2; --accent-ink:#0f1626; --accent-soft:#223049; --sun:#ffd470; --leaf:#8fd08a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;margin:0}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(18px, env(safe-area-inset-left,0px));padding-right:max(18px, env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.1rem,5.5vw,3.4rem)}
+h2{font-size:clamp(1.6rem,3.4vw,2.2rem)}
+h3{font-size:1.15rem;font-weight:600}
+p{margin:0}
+.eyebrow{font-family:var(--display);font-weight:600;font-size:.9rem;letter-spacing:.02em;text-transform:uppercase;color:var(--accent)}
+.lead{font-size:1.15rem;color:var(--muted);max-width:56ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 1.05rem var(--display);border-radius:999px;padding:14px 26px;border:none;background:var(--accent);color:var(--accent-ink);cursor:pointer;text-decoration:none;box-shadow:0 6px 0 rgba(42,39,64,.12)}
+.btn.ghost{background:transparent;color:var(--accent);box-shadow:none;text-decoration:underline}
+.btn:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+section{padding-block:clamp(40px,7vw,76px)}
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(24px,5vw,56px);align-items:center;padding-block:clamp(32px,6vw,60px)}
+.hero-copy{display:flex;flex-direction:column;gap:18px;min-width:0}
+.ctas{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:4px}
+.fine{font-size:.9rem;color:var(--muted)}
+.hero-art{position:relative;justify-self:center;width:min(100%,420px)}
+.hero-art img{width:100%;border-radius:20px;border:3px solid var(--line);background:#fff;display:block;transform:rotate(-2deg);box-shadow:0 18px 40px rgba(90,169,230,.22)}
+.badge{position:absolute;right:-6px;top:-14px;background:var(--sun);color:#5a4300;font:700 1rem var(--display);border-radius:999px;padding:12px 16px;transform:rotate(6deg);box-shadow:0 6px 0 rgba(42,39,64,.12)}
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:28px}
+.gallery figure{margin:0}
+.gallery img{width:100%;border-radius:14px;border:2px solid var(--line);background:#fff;display:block}
+.gallery figcaption{font-size:.85rem;color:var(--muted);text-align:center;margin-top:6px}
+.feat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:28px}
+.card{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:8px}
+.card .ico{font-size:1.8rem}
+.reserve{background:var(--accent-soft);border:2px solid var(--line);border-radius:22px;padding:clamp(22px,4vw,40px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(22px,4vw,44px);align-items:center}
+.price{font-family:var(--display);font-size:2.6rem;font-weight:700;color:var(--ink)}
+.price small{font-family:var(--body);font-size:1rem;font-weight:600;color:var(--muted)}
+form{display:flex;flex-direction:column;gap:14px}
+label{font-size:.95rem;font-weight:700;display:flex;flex-direction:column;gap:6px}
+input,select{font:1rem var(--body);padding:12px 14px;border:2px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);min-width:0}
+.check{flex-direction:row;align-items:flex-start;gap:10px;font-weight:400;font-size:.92rem}
+.err{color:#c0392b;font-size:.88rem;min-height:1.2em}
+.ok{background:var(--accent-soft);border-radius:14px;padding:18px;font-weight:700}
+.note{background:#fff6e0;color:#7a5a12;border-radius:12px;padding:12px 14px;font-size:.92rem}
+.faq{display:flex;flex-direction:column;gap:18px;max-width:72ch}
+.faq h3{font-family:var(--body);font-weight:700;font-size:1.02rem;margin-bottom:4px}
+footer{border-top:2px solid var(--line);padding-block:30px;font-size:.88rem;color:var(--muted)}
+footer .wrap{display:flex;flex-direction:column;gap:6px}
+@media (max-width:820px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.feat{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:760px){.hero,.reserve{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion:no-preference){.btn{transition:transform .12s}.btn:active{transform:translateY(2px)}}
+</style>
+</head>
+<body>
+
+<header class="wrap hero">
+  <div class="hero-copy">
+    <span class="eyebrow">Printable coloring book · ages 3–7</span>
+    <h1>Color along with Houlou, the sleepy little owl</h1>
+    <p class="lead">Houlou and his woodland friends are waiting to be brought to life with crayons. Big, friendly outlines made for small hands — print at home, color anywhere.</p>
+    <div class="ctas">
+      <a class="btn" href="#reserve">Reserve my copy · €4.90</a>
+      <a class="btn ghost" href="#peek">See the pages</a>
+    </div>
+    <p class="fine">Nothing to pay today. Reserve now and be the first to get it when it opens.</p>
+  </div>
+  <div class="hero-art">
+    <img src="pages/web-page-1-night.jpg" alt="Coloring page of Houlou the baby owl under the moon and stars">
+    <span class="badge">€4.90</span>
+  </div>
+</header>
+
+<section class="wrap" id="peek" aria-label="Sample pages">
+  <span class="eyebrow">A peek inside</span>
+  <h2 style="margin-top:8px">Pages made to be colored, not just looked at</h2>
+  <div class="gallery">
+    <figure><img src="pages/web-page-1-night.jpg" alt="Houlou under the moon"><figcaption>Goodnight, Houlou</figcaption></figure>
+    <figure><img src="pages/web-page-2-meadow.jpg" alt="Houlou watering flowers in a sunny meadow"><figcaption>In the meadow</figcaption></figure>
+    <figure><img src="pages/web-page-3-reading.jpg" alt="Houlou reading a book under a tree"><figcaption>Story time</figcaption></figure>
+    <figure><img src="pages/web-page-4-party.jpg" alt="Houlou holding balloons at a party"><figcaption>Party day</figcaption></figure>
+  </div>
+</section>
+
+<section class="wrap" aria-label="What's inside">
+  <span class="eyebrow">Why kids love it</span>
+  <h2 style="margin-top:8px">Simple, happy, and screen-free</h2>
+  <div class="feat">
+    <div class="card"><span class="ico">✏️</span><h3>Thick, easy outlines</h3><p>Big shapes and bold lines, perfect for little hands still learning to stay inside the lines.</p></div>
+    <div class="card"><span class="ico">🖨️</span><h3>Print as many as you like</h3><p>A PDF you download once and print again and again — at home, at grandma's, on a rainy day.</p></div>
+    <div class="card"><span class="ico">🦉</span><h3>One friendly little world</h3><p>Every page stars Houlou and his friends, so your child follows the same cuddly characters.</p></div>
+  </div>
+</section>
+
+<section class="wrap" id="reserve">
+  <div class="reserve">
+    <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
+      <span class="eyebrow">Coming soon</span>
+      <h2>Reserve Houlou's Coloring Book</h2>
+      <div class="price">€4.90 <small>one-time · instant PDF download</small></div>
+      <p class="lead" style="font-size:1rem">Leave your email and you'll be the first to know the moment it's ready — at the launch price.</p>
+      <p class="note">Nothing to pay today. You won't be charged anything unless you choose to buy it at launch.</p>
+    </div>
+    <div style="min-width:0">
+      <form id="f" novalidate>
+        <label for="email">Your email<input type="email" id="email" autocomplete="email" placeholder="you@example.com"></label>
+        <label for="age">Your child's age
+          <select id="age">
+            <option value="">Choose…</option>
+            <option>Under 3</option>
+            <option>3–4 years</option>
+            <option>5–6 years</option>
+            <option>7+ years</option>
+          </select>
+        </label>
+        <label class="check" for="ok"><input type="checkbox" id="ok" style="margin-top:4px">I'd like to be emailed when Houlou's Coloring Book is ready. Unsubscribe anytime.</label>
+        <div class="err" id="err" role="alert"></div>
+        <button class="btn" type="submit" id="go">Reserve my copy · €4.90</button>
+      </form>
+      <div class="ok" id="merci" hidden>You're on the list! 🦉 We'll email you the moment Houlou is ready.</div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="faq">
+  <span class="eyebrow">Good to know</span>
+  <h2 style="margin:8px 0 24px">Questions parents ask</h2>
+  <div class="faq">
+    <div><h3>What exactly do I get?</h3><p>A printable PDF coloring book starring Houlou the baby owl and his friends. You download it once and print the pages whenever you like.</p></div>
+    <div><h3>What age is it for?</h3><p>It's made for children aged 3 to 7, with thick, simple outlines. Younger and older children enjoy it too.</p></div>
+    <div><h3>Do I pay now?</h3><p>No. Reserving just adds your email to the list. You'll only pay if you decide to buy it at launch, at €4.90.</p></div>
+    <div><h3>How will I get it?</h3><p>By email, as a download link, as soon as it's ready.</p></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Houlou is an original character by RLBX, SASU, SIREN 995 302 668, Nantes, France. Contact: contact@rlbx.tech</span>
+    <span id="fb-line" hidden>Follow Houlou on Facebook</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var f=document.getElementById('f'),err=document.getElementById('err');
+  ['email','age','ok'].forEach(function(id){document.getElementById(id).addEventListener('input',function(){err.textContent=''})});
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var em=document.getElementById('email').value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){err.textContent='Please enter a valid email address.';return}
+    if(!document.getElementById('ok').checked){err.textContent='Please tick the box so we can email you.';return}
+    var FORM_URL='';
+    if(!FORM_URL){err.textContent='Reservations open very soon — please check back shortly.';return}
+    var d=new FormData();
+    d.append('EMAIL',em);
+    d.append('JOB_TITLE',document.getElementById('age').value);
+    d.append('OPT_IN','1');d.append('email_address_check','');d.append('locale','en');
+    var q=new URLSearchParams(location.search),ad=(q.get('utm_content')||'').replace(/[^A-Za-z0-9]/g,'').slice(0,8);
+    d.append('SOURCE','houlou-'+(q.get('utm_source')==='meta'?'meta-'+(ad||'x'):'direct'));
+    document.getElementById('go').disabled=true;
+    fetch(FORM_URL,{method:'POST',body:d,mode:'no-cors'}).then(function(){f.hidden=true;document.getElementById('merci').hidden=false}).catch(function(){err.textContent='Something went wrong. Please check your connection and try again.';document.getElementById('go').disabled=false});
+  });
+})();
+</script>
+</body>
+</html>
