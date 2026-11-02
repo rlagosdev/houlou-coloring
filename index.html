@@ -84,6 +84,8 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 .item .px{font:700 1.3rem var(--display)}
 .item .btn{margin-top:auto;padding:11px 16px;font-size:.98rem}
 .item.gift{grid-column:span 2;border-color:var(--accent)}
+.item.xmas{border-color:#c8202e}
+.item.xmas .btn{background:#c8202e;color:#fff}
 .free{display:inline-block;background:var(--leaf);color:#14361a;font:700 .78rem var(--body);border-radius:999px;padding:3px 10px;width:fit-content}
 @media (max-width:980px){.shop{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:520px){.shop{grid-template-columns:minmax(0,1fr)}.item.gift{grid-column:auto}}
@@ -174,6 +176,18 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
       <a class="btn buy" id="giftBuy" href="https://buy.stripe.com/cNi7sK6Q3dRxaW1cBXfMA0k">Get the gift set · €49.90</a>
       <p class="fine">Pick the color here, the size on the next page. Ships in about 5–10 business days.</p>
     </div>
+  </div>
+</section>
+
+<section class="wrap" id="christmas" aria-label="Houlou Christmas collection">
+  <span class="eyebrow">New · Christmas collection</span>
+  <h2 style="margin-top:8px">A Houlou Christmas 🎄</h2>
+  <p class="lead" style="margin-top:8px">Decorate the tree and the kids' room with Houlou and his friends. Free shipping included. <strong>Order by December 5</strong> to receive it before Christmas (made to order, delivered in about 2–3 weeks).</p>
+  <div class="shop">
+    <div class="item xmas" id="coffret-noel"><img src="shop/noel-coffret.jpg" alt="Houlou Christmas Box: garland, ornament, stocking and 4 printable ebooks" loading="lazy"><span class="free">Best value · ebooks included</span><h3>Christmas Box</h3><p class="fine">Garland + ornament + stocking + the 4 printable ebooks</p><div class="px">€59.90</div><a class="btn buy" href="https://buy.stripe.com/fZu6oGb6j28P9RXfO9fMA0v">Get the Christmas Box</a></div>
+    <div class="item"><img src="shop/noel-guirlande.jpg" alt="Merry Xmas garland with 12 flags" loading="lazy"><span class="free">Free shipping</span><h3>Merry Xmas garland</h3><p class="fine">12 canvas flags · rope included</p><div class="px">€29.90</div><a class="btn buy" href="https://buy.stripe.com/28E8wO6Q3bJp3tz59vfMA0s">Buy</a></div>
+    <div class="item"><img src="shop/noel-boule.jpg" alt="Houlou ceramic Christmas ornament" loading="lazy"><span class="free">Free shipping</span><h3>Christmas ornament</h3><p class="fine">Ceramic · printed on both sides</p><div class="px">€17.90</div><a class="btn buy" href="https://buy.stripe.com/fZufZg6Q38xdggl7hDfMA0t">Buy</a></div>
+    <div class="item"><img src="shop/noel-chaussette.jpg" alt="Houlou Christmas stocking" loading="lazy"><span class="free">Free shipping</span><h3>Christmas stocking</h3><p class="fine">Soft flannel · faux-fur cuff</p><div class="px">€21.90</div><a class="btn buy" href="https://buy.stripe.com/6oUbJ00rF6p5fchdG1fMA0u">Buy</a></div>
   </div>
 </section>
 
