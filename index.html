@@ -116,6 +116,11 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 .btn.opt{background:var(--paper);color:var(--ink);border:2px solid var(--line);cursor:pointer;font:inherit;font-weight:700}
 .btn.opt.on{border-color:var(--accent);background:var(--accent);color:var(--accent-ink)}
 #giftBuy{display:block;text-align:center;margin-top:4px}
+#free .reserve img{width:100%;max-width:300px;border-radius:14px;border:2px solid var(--line);background:#fff;display:block;margin-inline:auto;transform:rotate(-2deg)}
+#free .dl{display:block;text-align:center}
+#free [hidden]{display:none!important}
+#free .check input{width:20px;height:20px;padding:0;flex:0 0 auto;margin-top:2px;accent-color:var(--accent)}
+@media (max-width:720px){#free .reserve{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body>
@@ -128,7 +133,7 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
     <div class="ctas">
       <a class="btn" href="#bundles">See our bundles</a>
       <a class="btn sun" href="https://buy.stripe.com/fZu5kCcan4gX2pvdG1fMA01">Single book · €4.90</a>
-      <a class="btn ghost" href="#peek">See the pages</a>
+      <a class="btn ghost" href="#free">Free coloring page</a>
     </div>
     <p class="fine">Instant PDF download · 20 coloring pages · print as many times as you like.</p>
     <button class="song" id="song" type="button" aria-pressed="false"><span class="pi" id="songIco">▶</span><span id="songTxt">Listen to Houlou's song</span><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span></button>
@@ -139,6 +144,29 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
     <span class="badge">€4.90</span>
   </div>
 </header>
+
+<section class="wrap" id="free" aria-labelledby="free-t">
+  <div class="reserve">
+    <img src="pages/web-page-2-meadow.jpg" alt="Free coloring page: Houlou watering flowers in the meadow" loading="lazy">
+    <div>
+      <span class="free">Free · printable PDF</span>
+      <h2 id="free-t" style="margin-top:8px">Try a free page first</h2>
+      <p class="lead" style="margin-top:6px">Get one page from the book for free. Print it, let your little one color it, and see if Houlou becomes a favorite.</p>
+      <form id="ff" novalidate style="margin-top:14px">
+        <label>Your email<input type="email" id="fem" autocomplete="email" required placeholder="you@example.com"></label>
+        <label class="check"><input type="checkbox" id="fnews"><span>Yes, send me new Houlou pages and offers (optional, unsubscribe anytime).</span></label>
+        <button class="btn" id="fgo" type="submit">Get my free page</button>
+        <p class="err" id="ferr" role="alert"></p>
+        <p class="fine">We use your email to note your free page. Offers only if you tick the box. See our <a href="terms.html">terms</a>.</p>
+      </form>
+      <div class="ok" id="fok" hidden>
+        <p>Here it is! Print it on A4 or Letter paper.</p>
+        <a class="btn sun dl" href="free/houlou-free-coloring-page.pdf" download>Download the free page (PDF)</a>
+        <p class="fine" style="font-weight:400;margin-top:10px">Liked it? The full book has 20 pages for €4.90 — <a href="#bundles">see the books</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="wrap" id="bundles" aria-label="Houlou bundles">
   <span class="eyebrow">Best value · our bundles</span>
@@ -303,6 +331,29 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
   var src=(q.get('utm_source')||'direct')+'-'+(q.get('utm_content')||q.get('utm_medium')||'x');
   src=src.replace(/[^A-Za-z0-9_-]/g,'').slice(0,60);
   document.querySelectorAll('a.buy').forEach(function(a){a.href=a.href.split('?')[0]+'?client_reference_id='+encodeURIComponent('houlou-'+src)});
+})();
+</script>
+<script>
+(function(){
+  // Page gratuite contre e-mail : le contact va dans la liste Brevo 14 (Houlou coloring).
+  // Consentement marketing uniquement si la case est cochée (OPT_IN), noté aussi dans JOB_TITLE.
+  var FORM_URL='https://46c1f093.sibforms.com/serve/MUIFABIfTCIP49X1H0qYP68kx1R84rEStPUgSZeukm75Hiftk3lbAvT00L8461Y6sK4qJAbc_-vyrvaRx94JqWwpji7sY6aQsOWhJIb4G9xLDPsgDqEXYrhQQtgj4Af9Z3dAvtAcPaX9e2y14GNmZ0ViR-CyjQjFllgfQJDAAxUUH1cnXodd4PGjZleVXvbzCpPXEGsuqDYvV3auTQ==';
+  var f=document.getElementById('ff'),err=document.getElementById('ferr'),go=document.getElementById('fgo');
+  var q=new URLSearchParams(location.search);
+  var src=((q.get('utm_source')||'direct')+'-'+(q.get('utm_content')||q.get('utm_medium')||'x')).replace(/[^A-Za-z0-9_-]/g,'').slice(0,50);
+  f.addEventListener('submit',function(e){
+    e.preventDefault();err.textContent='';
+    var em=document.getElementById('fem').value.trim(),news=document.getElementById('fnews').checked;
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){err.textContent='Please enter a valid email address.';return}
+    go.disabled=true;
+    var d=new FormData();
+    d.append('EMAIL',em);d.append('JOB_TITLE','free page · news '+(news?'yes':'no'));
+    d.append('SOURCE','houlou-free-'+src);
+    if(news)d.append('OPT_IN','1');
+    d.append('email_address_check','');d.append('locale','en');
+    function ok(){f.hidden=true;document.getElementById('fok').hidden=false}
+    fetch(FORM_URL,{method:'POST',body:d,mode:'no-cors'}).then(ok).catch(ok); // la page gratuite est donnée même si l'envoi échoue
+  });
 })();
 </script>
 <script>
