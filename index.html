@@ -141,6 +141,7 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
         <p class="lead" style="margin-top:6px">Houlou meets Pip the penguin! Leave your email and print it right away.</p>
         <form id="ff" novalidate style="margin-top:14px">
           <label>Your email<input type="email" id="fem" autocomplete="email" required placeholder="you@example.com"></label>
+          <input type="text" id="fhp" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-5000px;width:1px;height:1px;opacity:0">
           <label class="check"><input type="checkbox" id="fnews"><span>Yes, send me new Houlou pages and offers (optional, unsubscribe anytime).</span></label>
           <button class="btn" id="fgo" type="submit">Get my free page</button>
           <p class="err" id="ferr" role="alert"></p>
@@ -378,7 +379,8 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 (function(){
   // Page gratuite contre e-mail : le contact va dans la liste Brevo 14 (Houlou coloring).
   // Consentement marketing uniquement si la case est cochée (OPT_IN), noté aussi dans JOB_TITLE.
-  var FORM_URL='https://46c1f093.sibforms.com/serve/MUIFABIfTCIP49X1H0qYP68kx1R84rEStPUgSZeukm75Hiftk3lbAvT00L8461Y6sK4qJAbc_-vyrvaRx94JqWwpji7sY6aQsOWhJIb4G9xLDPsgDqEXYrhQQtgj4Af9Z3dAvtAcPaX9e2y14GNmZ0ViR-CyjQjFllgfQJDAAxUUH1cnXodd4PGjZleVXvbzCpPXEGsuqDYvV3auTQ==';
+  // Point d'inscription commun (Worker Cloudflare « inscription » sur medias.rlbx.tech).
+  var FORM_URL='https://medias.rlbx.tech/api/inscription';
   var f=document.getElementById('ff'),err=document.getElementById('ferr'),go=document.getElementById('fgo');
   var q=new URLSearchParams(location.search);
   var src=((q.get('utm_source')||'direct')+'-'+(q.get('utm_content')||q.get('utm_medium')||'x')).replace(/[^A-Za-z0-9_-]/g,'').slice(0,50);
@@ -386,14 +388,16 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
     e.preventDefault();err.textContent='';
     var em=document.getElementById('fem').value.trim(),news=document.getElementById('fnews').checked;
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){err.textContent='Please enter a valid email address.';return}
-    go.disabled=true;
-    var d=new FormData();
-    d.append('EMAIL',em);d.append('JOB_TITLE','free page · news '+(news?'yes':'no'));
-    d.append('SOURCE','houlou-free-'+src);
-    if(news)d.append('OPT_IN','1');
-    d.append('email_address_check','');d.append('locale','en');
-    function ok(){f.hidden=true;document.getElementById('fok').hidden=false}
-    fetch(FORM_URL,{method:'POST',body:d,mode:'no-cors'}).then(ok).catch(ok); // la page gratuite est donnée même si l'envoi échoue
+    go.disabled=true;go.textContent='Sending…';
+    var d={site:'houlou',email:em,JOB_TITLE:'free page · news '+(news?'yes':'no'),
+      SOURCE:'houlou-free-'+src,OPT_IN:news,email_address_check:document.getElementById('fhp').value};
+    fetch(FORM_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})
+      .then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok||!j.ok)throw j})})
+      .then(function(){f.hidden=true;document.getElementById('fok').hidden=false})
+      .catch(function(j){
+        err.textContent=j&&j.erreur==='email'?'Please enter a valid email address.':"We couldn't save your email just now. Please try again, or write to contact@rlbx.tech.";
+        go.disabled=false;go.textContent='Try again';
+      });
   });
 })();
 </script>
