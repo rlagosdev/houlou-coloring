@@ -1,0 +1,5 @@
+# coloring.houlou.fr : pages publiques de Houlou's Coloring Book (05/11/2026)
+User-agent: *
+Allow: /
+
+Sitemap: https://coloring.houlou.fr/sitemap.xml
