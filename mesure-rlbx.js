@@ -14,7 +14,13 @@
    Chaque événement porte aussi page, utm_campaign et utm_content (lettre de la pub).
 
    Ne plus compter ses propres visites : ouvrir une fois la page avec ?mesure=non (sur chaque site et chaque appareil) ;
-   ?mesure=oui pour revenir. Cela pose localStorage « umami.disabled », que le script d'Umami respecte. */
+   ?mesure=oui pour revenir. Cela pose localStorage « umami.disabled », que le script d'Umami respecte.
+
+   Vérifier la mesure sans fausser les chiffres : ouvrir la page avec ?mesure=test. Pour tout le reste de l'onglet, aucune
+   page vue n'est comptée (ni visite, ni visiteur) : chaque page envoie à la place l'événement « visite-test », et tous les
+   événements portent le suffixe « -test » (defilement-50-test, clic-paiement-test…).
+   Marche aussi sur un appareil exclu par ?mesure=non : l'exclusion est levée le temps de l'onglet, puis remise dès qu'on
+   quitte la page (elle ne compte donc pas ses visites suivantes). */
 (function () {
   'use strict';
   var moi = document.currentScript;
@@ -31,7 +37,18 @@
 
   var q = new URLSearchParams(location.search);
   if (q.get('mesure') === 'non') ecrire('umami.disabled', '1');
-  if (q.get('mesure') === 'oui') ecrire('umami.disabled', null);
+  if (q.get('mesure') === 'oui') { ecrire('umami.disabled', null); sEcrire('mesure-test', null); sEcrire('mesure-reexclure', null); }
+  // Mode test (?mesure=test) : onglet marqué test ; un appareil exclu est remesuré le temps de l'onglet seulement
+  if (q.get('mesure') === 'test') {
+    sEcrire('mesure-test', '1');
+    if (lire('umami.disabled')) sEcrire('mesure-reexclure', '1');
+  }
+  if (sLire('mesure-test') === '1' && sLire('mesure-reexclure') === '1') {
+    ecrire('umami.disabled', null);
+    // remise de l'exclusion en quittant la page (la page suivante de l'onglet la relève au chargement)
+    window.addEventListener('pagehide', function () { ecrire('umami.disabled', '1'); });
+    window.addEventListener('pageshow', function (e) { if (e.persisted) ecrire('umami.disabled', null); });
+  }
   if (!SITE || lire('umami.disabled')) return;
 
   // utm de la pub, gardés pour l'onglet (la visite peut passer d'une page à l'autre du même site)
@@ -80,9 +97,13 @@
   u.src = HOTE + '/m.js';
   u.setAttribute('data-website-id', SITE);
   u.setAttribute('data-before-send', 'rlbxAvantEnvoi');
+  // Mode test : pas de page vue (elle compterait une visite), un événement « visite-test » à la place
+  var modeTest = sLire('mesure-test') === '1';
+  if (modeTest) u.setAttribute('data-auto-track', 'false');
   if (moi.nonce) u.nonce = moi.nonce;
   u.onload = function () { var f = file; file = []; f.forEach(function (x) { window.umami.track(x[0], x[1]); }); };
   document.head.appendChild(u);
+  if (modeTest) ev('visite');
 
   // Vente confirmée (page après paiement) : <script … data-vente='{"produit":"…","montant":4.9,"test":false}'>
   var vente = moi.getAttribute('data-vente');
