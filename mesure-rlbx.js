@@ -6,7 +6,7 @@
    Événements envoyés (le suffixe « -test » remplace l'événement normal pour une adresse de test ou un paiement Stripe de test) :
      defilement-25/50/75/100            défilement de la page
      clic-paiement {produit, prix}      clic vers un paiement Stripe
-     clic-bouton {bouton}               clic sur un autre bouton d'appel à l'action
+     clic-bouton {bouton}               clic sur un autre bouton d'appel à l'action (bouton = data-mesure s'il existe)
      formulaire-debut {formulaire}      premier clic dans un formulaire
      formulaire-envoi {formulaire}      tentative d'envoi
      inscription-ok / inscription-erreur {formulaire, erreur}
@@ -146,7 +146,8 @@
     var classe = el.getAttribute('class') || '';
     var envoi = el.tagName === 'INPUT' || (el.tagName === 'BUTTON' && (el.getAttribute('type') || 'submit') === 'submit' && el.form);
     var cta = envoi || /\b(btn|button|cta|buy|bouton)\b/i.test(classe) || /^#(free|ff|reserver|formulaire|f$|f1$)/.test(href);
-    if (cta) ev('clic-bouton', { bouton: texte(el), cible: href.slice(0, 60) });
+    // data-mesure="jouer-web" : nom fixe du bouton, le même dans toutes les langues de la page
+    if (cta) ev('clic-bouton', { bouton: (el.getAttribute('data-mesure') || texte(el)).slice(0, 60), cible: href.slice(0, 60) });
   }, true);
 
   // Premier clic dans chaque formulaire, et tentative d'envoi

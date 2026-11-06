@@ -121,6 +121,10 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 #free [hidden]{display:none!important}
 #free .check input{width:20px;height:20px;padding:0;flex:0 0 auto;margin-top:2px;accent-color:var(--accent)}
 @media (max-width:720px){#free .reserve{grid-template-columns:minmax(0,1fr)}}
+.free-w{display:grid;grid-template-columns:minmax(0,.6fr) minmax(0,1.4fr);gap:clamp(18px,4vw,36px);align-items:center}
+.free-w img{width:100%;max-width:260px;border-radius:14px;border:2px solid var(--line);background:#fff;display:block;justify-self:center}
+#free .dl{display:block;text-align:center}
+@media (max-width:720px){.free-w{grid-template-columns:minmax(0,1fr)}.free-w img{max-width:170px}}
 </style>
 <style>
 .lp-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:18px}
@@ -166,6 +170,29 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
     <div class="trust"><span>⚡ Instant download</span><span>🖨️ Print again and again</span><span>❄️ Perfect for snow days</span></div>
   </div>
 </header>
+<section class="wrap" id="free" aria-labelledby="free-t">
+  <div class="reserve free-w">
+    <img src="../winter/page-01-meet-pip.jpg" alt="Free coloring page: Houlou meets Pip the penguin on the ice" loading="lazy">
+    <div>
+      <span class="free">Free · printable page</span>
+      <h2 id="free-t" style="margin-top:8px">Try a page for free</h2>
+      <p class="lead" style="margin-top:6px">Not sure yet? Get the first page of the album, Houlou meets Pip the penguin, free. Leave your email and print it right away.</p>
+      <form id="ff" novalidate style="margin-top:14px">
+        <label>Your email<input type="email" id="fem" autocomplete="email" required placeholder="you@example.com"></label>
+        <input type="text" id="fhp" name="hp_zx" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-5000px;width:1px;height:1px;opacity:0">
+        <label class="check"><input type="checkbox" id="fnews"><span>Yes, send me new Houlou pages and offers (optional, unsubscribe anytime).</span></label>
+        <button class="btn" id="fgo" type="submit">Get my free page</button>
+        <p class="err" id="ferr" role="alert"></p>
+        <p class="fine">We use your email to send you this free page. Offers only if you tick the box. See our <a href="../terms.html">terms</a>.</p>
+      </form>
+      <div class="ok" id="fok" hidden>
+        <p>Here it is! Print it on A4 or Letter paper.</p>
+        <a class="btn sun dl" href="../free/houlou-free-coloring-page.pdf" download>Download the free page (PDF)</a>
+        <p class="fine" style="font-weight:400;margin-top:10px">Liked it? The 19 other pages are in the full album — <a class="buy" href="https://buy.stripe.com/14AbJ02zN3cT4xD9pLfMA0x">get the Winter Album · €4.90</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="wrap"><span class="eyebrow">A peek inside</span><h2 style="margin-top:8px">Big, friendly outlines made for small hands</h2>
 <div class="gal"><figure style="margin:0"><img src="../winter/page-01-meet-pip.jpg" alt="Houlou meets Pip" loading="lazy"><figcaption>Houlou meets Pip</figcaption></figure><figure style="margin:0"><img src="../winter/page-08-cocoa.jpg" alt="Hot cocoa in the igloo" loading="lazy"><figcaption>Hot cocoa in the igloo</figcaption></figure><figure style="margin:0"><img src="../winter/page-15-winter-tree.jpg" alt="Decorating the winter tree" loading="lazy"><figcaption>Decorating the winter tree</figcaption></figure><figure style="margin:0"><img src="../winter/page-17-dots-pip.jpg" alt="Dot-marker page" loading="lazy"><figcaption>Dot-marker page</figcaption></figure></div>
 </section>
@@ -192,7 +219,33 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
 })();
 </script>
 
-<script src="/usd.js?v=2"></script>
-<script defer src="/mesure-rlbx.js?v=2" data-site="d3d7b0e2-7f4c-4114-8969-dd8a4a302fd8" data-page="winter"></script>
+<script>
+(function(){
+  // Page gratuite contre e-mail (06/11/2026) : comme #free de l'accueil, contact dans la liste Brevo 14 (Houlou coloring).
+  // Consentement marketing uniquement si la case est cochée (OPT_IN), noté aussi dans JOB_TITLE.
+  var FORM_URL='https://medias.rlbx.tech/api/inscription';
+  var f=document.getElementById('ff'),err=document.getElementById('ferr'),go=document.getElementById('fgo');
+  if(!f)return;
+  var q=new URLSearchParams(location.search);
+  var src=((q.get('utm_source')||'direct')+'-'+(q.get('utm_content')||q.get('utm_medium')||'x')).replace(/[^A-Za-z0-9_-]/g,'').slice(0,40);
+  f.addEventListener('submit',function(e){
+    e.preventDefault();err.textContent='';
+    var em=document.getElementById('fem').value.trim(),news=document.getElementById('fnews').checked;
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){err.textContent='Please enter a valid email address.';return}
+    go.disabled=true;go.textContent='Sending…';
+    var d={site:'houlou',email:em,JOB_TITLE:'free page (winter) · news '+(news?'yes':'no'),
+      SOURCE:'houlou-free-winter-'+src,OPT_IN:news,email_address_check:document.getElementById('fhp').value};
+    fetch(FORM_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})
+      .then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok||!j.ok)throw j})})
+      .then(function(){f.hidden=true;document.getElementById('fok').hidden=false})
+      .catch(function(j){
+        err.textContent=j&&j.erreur==='email'?'Please enter a valid email address.':"We couldn't save your email just now. Please try again, or write to contact@rlbx.tech.";
+        go.disabled=false;go.textContent='Try again';
+      });
+  });
+})();
+</script>
+<script src="/usd.js?v=3"></script>
+<script defer src="/mesure-rlbx.js?v=3" data-site="d3d7b0e2-7f4c-4114-8969-dd8a4a302fd8" data-page="winter"></script>
 </body>
 </html>
