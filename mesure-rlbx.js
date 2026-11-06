@@ -5,6 +5,7 @@
 
    Événements envoyés (le suffixe « -test » remplace l'événement normal pour une adresse de test ou un paiement Stripe de test) :
      defilement-25/50/75/100            défilement de la page
+     presence-10s                       page restée affichée 10 s (onglet visible), seuil d'une visite « engagée » de GA4
      clic-paiement {produit, prix}      clic vers un paiement Stripe
      clic-bouton {bouton}               clic sur un autre bouton d'appel à l'action (bouton = data-mesure s'il existe)
      formulaire-debut {formulaire}      premier clic dans un formulaire
@@ -127,6 +128,17 @@
   }
   var attente;
   window.addEventListener('scroll', function () { clearTimeout(attente); attente = setTimeout(defil, 200); }, { passive: true });
+
+  // Présence de 10 s, onglet visible seulement (06/11/2026) : pour comparer le rebond aux repères publiés (GA4).
+  var cumul = 0, depuis = document.visibilityState === 'visible' ? Date.now() : 0, present = 0;
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible') { depuis = Date.now(); }
+    else { if (depuis) cumul += Date.now() - depuis; depuis = 0; }
+  });
+  var minuteur = setInterval(function () {
+    if (present) return;
+    if (cumul + (depuis ? Date.now() - depuis : 0) >= 10000) { present = 1; clearInterval(minuteur); ev('presence-10s'); }
+  }, 1000);
 
   function texte(el) { return (el.innerText || el.value || el.getAttribute('aria-label') || '').replace(/\s+/g, ' ').trim().slice(0, 60); }
   function nomForm(f) { return f ? (f.id || f.getAttribute('name') || f.getAttribute('action') || 'formulaire').slice(0, 40) : 'formulaire'; }
