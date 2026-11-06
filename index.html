@@ -184,6 +184,19 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
     <span class="badge">€4.90</span>
   </div>
 </header>
+<script>
+// 06/11/2026 : les pubs autres que « B – free sample » promettent le livre à 4,90 €. Pour elles, le livre passe
+// avant la page gratuite, avec le bouton d'achat en premier (90 % des visiteurs partaient sans faire défiler).
+(function(){
+  var c=new URLSearchParams(location.search).get('utm_content');
+  if(!c||c==='B')return;
+  var h=document.querySelector('header.hero'),f=document.getElementById('free');
+  if(!h||!f)return;
+  f.parentNode.insertBefore(h,f);
+  var a=h.querySelector('.ctas .btn.sun');
+  if(a)a.parentNode.insertBefore(a,a.parentNode.firstChild);
+})();
+</script>
 
 
 
@@ -372,7 +385,7 @@ footer .wrap{display:flex;flex-direction:column;gap:6px}
   var q=new URLSearchParams(location.search);
   var src=(q.get('utm_source')||'direct')+'-'+(q.get('utm_content')||q.get('utm_medium')||'x');
   src=src.replace(/[^A-Za-z0-9_-]/g,'').slice(0,60);
-  document.querySelectorAll('a.buy').forEach(function(a){a.href=a.href.split('?')[0]+'?client_reference_id='+encodeURIComponent('houlou-'+src)});
+  document.querySelectorAll('a.buy, a[href^="https://buy.stripe.com/"]').forEach(function(a){a.href=a.href.split('?')[0]+'?client_reference_id='+encodeURIComponent('houlou-'+src)});
 })();
 </script>
 <script>
