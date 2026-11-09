@@ -2,7 +2,7 @@
 // Le pays vient de l'adresse IP (Worker Cloudflare /geo, request.cf.country) ; à défaut, du fuseau horaire.
 // Stripe facture les mêmes montants en USD (currency_options des prix, 03/11/2026).
 (function () {
-  var USD = { '3.90': '4.49', '4.90': '5.99', '6.90': '7.99', '11.90': '13.90', '11.99': '13.99', '17.90': '20.99', '21.90': '25.99', '24.90': '28.99',
+  var USD = { '3.90': '4.49', '4.90': '5.99', '6.90': '7.99', '11.90': '13.90', '11.99': '13.99', '17.90': '20.99', '19.90': '22.99', '21.90': '25.99', '24.90': '28.99',
     '27.90': '32.99', '29.90': '34.99', '32.90': '37.99', '49.90': '57.99', '59.90': '68.99', '69.70': '81.97' };
   var re = /€\s?(\d+(?:\.\d\d)?)/g;
   function conv(s) { return s.replace(re, function (m, n) { return USD[n] ? '$' + USD[n] : m; }); }
