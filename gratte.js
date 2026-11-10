@@ -8,7 +8,10 @@
   var FR = /^fr/i.test(document.documentElement.lang || '') || location.pathname.indexOf('/fr/') === 0;
   function t(en, fr) { return FR ? fr : en; }
   var gratte = false;
-  try { gratte = localStorage.getItem('houlou-gratte') === '1'; } catch (e) {}
+  try {
+    if (/[?&]regratter\b/.test(location.search)) localStorage.removeItem('houlou-gratte'); // pour revoir la carte
+    gratte = localStorage.getItem('houlou-gratte') === '1';
+  } catch (e) {}
 
   function track(n, d) { try { window.umami && window.umami.track(n, d || {}); } catch (e) {} }
   function prerempli() {
