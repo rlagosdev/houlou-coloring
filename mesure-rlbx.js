@@ -8,6 +8,7 @@
      presence-10s                       page restée affichée 10 s (onglet visible), seuil d'une visite « engagée » de GA4
      clic-paiement {produit, prix}      clic vers un paiement Stripe
      clic-bouton {bouton}               clic sur un autre bouton d'appel à l'action (bouton = data-mesure s'il existe)
+     sortie-reseau {reseau, bouton}     clic vers Facebook, Instagram ou WhatsApp (tout lien, barre du haut comprise)
      formulaire-debut {formulaire}      premier clic dans un formulaire
      formulaire-envoi {formulaire}      tentative d'envoi
      inscription-ok / inscription-erreur {formulaire, erreur}
@@ -153,6 +154,14 @@
       var titre = bloc && bloc.querySelector('h1, h2, h3, h4');
       var prix = (t.match(/[€$]\s?\d+(?:[.,]\d{2})?|\d+(?:[.,]\d{2})?\s?[€$]/) || [''])[0];
       ev('clic-paiement', { produit: (titre ? texte(titre) : t).slice(0, 60), prix: prix, lien: href.split('?')[0].split('/').pop() });
+      return;
+    }
+    // 10/11/2026 : tout lien vers Facebook, Instagram ou WhatsApp (barre du haut comprise), quelle que soit sa classe
+    var reseau = (href.match(/^https?:\/\/(?:[\w-]+\.)*(facebook\.com|fb\.me|instagram\.com|whatsapp\.com|wa\.me)\b/i) || [])[1];
+    if (reseau) {
+      ev('sortie-reseau', { reseau: /whatsapp|wa\.me/i.test(reseau) ? 'whatsapp' : /instagram/i.test(reseau) ? 'instagram' : 'facebook',
+                            bouton: (el.getAttribute('data-mesure') || texte(el) || el.getAttribute('class') || '').slice(0, 60),
+                            cible: href.slice(0, 60) });
       return;
     }
     var classe = el.getAttribute('class') || '';
